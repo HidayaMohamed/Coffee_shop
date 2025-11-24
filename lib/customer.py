@@ -26,4 +26,6 @@ class Customer:
         # Return ALL unique Coffee objects this customer has ordered.
         return list({order.coffee for order in self.orders()})
     
+    def create_order(self, coffee, price):
+        return Order(self, coffee, price)
     
