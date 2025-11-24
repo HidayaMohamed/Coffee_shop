@@ -1,6 +1,12 @@
+from .order import Order
+from .coffee import Coffee
+
 class Customer:
+    all = []
     def __init__(self, name):
         self.name = name
+
+        Customer.all.append(self)
 
     @property
     def name(self):
