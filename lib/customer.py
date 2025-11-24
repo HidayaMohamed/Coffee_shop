@@ -18,3 +18,12 @@ class Customer:
         if not (1 <= len(value) <= 15):
             raise Exception("Customer name must be between 1 and 15 characters.")
         self._name = value
+
+    def orders(self):
+        # Returns alist of orders, this customer has ordered. 
+        return [order for order in Order.all if order.customer is self]
+    def coffees(self):
+        # Return ALL unique Coffee objects this customer has ordered.
+        return list({order.coffee for order in self.orders()})
+    
+    
