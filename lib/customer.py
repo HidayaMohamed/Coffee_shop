@@ -1,13 +1,17 @@
+# imports other classes
 from .order import Order
 from .coffee import Coffee
 
 class Customer:
+    # A class variable that stores all the customers.
     all = []
+    # the class is initialized with name.
     def __init__(self, name):
         self.name = name
-
+    #    Updated the class list all when a cusomer is instantiated.
         Customer.all.append(self)
 
+    # Sets property for name and validates the anme is a string and between 1 - 15 characters. 
     @property
     def name(self):
         return self._name
@@ -19,17 +23,19 @@ class Customer:
             raise Exception("Customer name must be between 1 and 15 characters.")
         self._name = value
 
-    def orders(self):
-        # Returns alist of orders, this customer has ordered. 
+    # Returns alist of orders, this customer has ordered.
+    def orders(self): 
         return [order for order in Order.all if order.customer is self]
+    
+    # Return ALL unique Coffee objects this customer has ordered.
     def coffees(self):
-        # Return ALL unique Coffee objects this customer has ordered.
         return list({order.coffee for order in self.orders()})
     
+    # THis method creates an order for a cutomer.
     def create_order(self, coffee, price):
         return Order(self, coffee, price)
     
-
+    # 
     @classmethod
     def most_aficionado(cls, coffee):
         # Make sure the argument is a Coffee object
@@ -52,6 +58,7 @@ class Customer:
             customer = order.customer
             price = order.price
 
+            # if a customer doesn't spend , sets spending to 0
             if customer not in spending:
                 spending[customer] = 0
 
